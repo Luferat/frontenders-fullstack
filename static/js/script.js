@@ -28,9 +28,9 @@ const userClickId = 'userInOutLink';
  * - Se vazio (""), não envia os dados para a API/backend;
  * - Se "firebase", faz a persistência no projeto atual do Firebase Firestore, na coleção `Users`;
  */
-// const apiLoginEndpoint = 'firebase';
+const apiLoginEndpoint = 'firebase';
 // const apiLoginEndpoint = '/owner/login';
-const apiLoginEndpoint = '';
+// const apiLoginEndpoint = '';
 
 /** 
  * Configuração: rota de logout

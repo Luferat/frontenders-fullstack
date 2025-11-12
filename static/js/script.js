@@ -29,7 +29,7 @@ const userClickId = 'userInOutLink';
  * - Se "firebase", faz a persistência no projeto atual do Firebase Firestore, na coleção `Users`;
  */
 // const apiLoginEndpoint = 'firebase';
-const apiLoginEndpoint = '/owner/login'; // Exemplo
+const apiLoginEndpoint = '/owner/login';
 // const apiLoginEndpoint = '';
 
 /** 

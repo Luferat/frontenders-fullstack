@@ -7,12 +7,15 @@ owner_bp = Blueprint('owner', __name__)
 
 @owner_bp.route('/login', methods=['POST'])
 def owner_login():
-    data = request.json  # Recebe os dados do usuário em JSON
+    # Recebe os dados do usuário em JSON
+    data = request.json  
+    print(data) # Debug
 
     # Validação básica dos dados recebidos (ajuste conforme necessário)
     if not data or 'uid' not in data or 'email' not in data or 'createdAt' not in data or 'lastLoginAt' not in data:
         return jsonify({'error': 'Dados inválidos'}), 400
 
+    # Conecta ao banco de dados
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
 

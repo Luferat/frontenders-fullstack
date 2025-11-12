@@ -5,6 +5,8 @@ import sqlite3
 DB_NAME = 'database.db'
 
 # Função para inicializar o banco de dados e criar as tabelas se não existirem
+
+
 def init_db():
     conn = sqlite3.connect(DB_NAME)
     cursor = conn.cursor()
@@ -35,6 +37,20 @@ def init_db():
             pad_status TEXT NOT NULL DEFAULT 'ON' CHECK (pad_status IN ('ON', 'OFF', 'DEL')),
             pad_metadata TEXT,
             FOREIGN KEY (pad_owner) REFERENCES owners (own_id)
+        )
+    ''')
+
+    # Cria a tabela "contacts" se não existir
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS contacts (
+            cnt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            cnt_created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            cnt_name TEXT,
+            cnt_email TEXT,
+            cnt_subject TEXT,
+            cnt_message TEXT,
+            cnt_status TEXT NOT NULL DEFAULT 'RECEIVED' CHECK (cnt_status IN ('RECEIVED', 'READED', 'RESPONDED', 'DELETED')),
+            cnt_metadata TEXT
         )
     ''')
 

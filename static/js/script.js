@@ -28,7 +28,7 @@ const userClickId = 'userInOutLink';
  * - Se vazio (""), não envia os dados para a API/backend;
  * - Se "firebase", faz a persistência no projeto atual do Firebase Firestore, na coleção `Users`;
  */
-const apiLoginEndpoint = 'firebase';
+// const apiLoginEndpoint = 'firebase';
 // const apiLoginEndpoint = '/owner/login'; // Exemplo
 // const apiLoginEndpoint = '';
 
@@ -49,7 +49,7 @@ const apiLogoutEndpoint = '';
  *  - Se true, mostra logs
  *  - Se false, oculta logs
  */
-const showLogs = false;
+const showLogs = true;
 
 /**************************************************************************
  * Não altere nada à partir daqui a não ser que saiba o que está fazendo! *
@@ -143,7 +143,7 @@ const updateUI = (user) => {
         // Usuário LOGADO: Mostra o Avatar
 
         // Atualiza o elemento <img> com o avatar do usuário (photoURL)
-        const avatarImg = `<img src="${user.photoURL || 'static/img/user.png'}" alt="${user.displayName || 'Avatar do Usuário'}" class="rounded-circle avatar-sm" referrerpolicy="no-referrer">`;
+        const avatarImg = `<img src="${user.photoURL || '/static/img/user.png'}" alt="${user.displayName || 'Avatar do Usuário'}" class="rounded-circle avatar-sm" referrerpolicy="no-referrer">`;
 
         // Atualiza o elemento <span> com nome do usuário (displayName)
         const loginSpan = `<span class="d-md-none ms-3">${user.displayName || 'Usuário logado'}</span>`;
@@ -177,7 +177,7 @@ const updateUI = (user) => {
         // Usuário DESLOGADO: Mostra a imagem padrão
 
         // Cria o elemento <img> (ícone)
-        const icon = `<img src="static/img/user.png" alt="Logue-se com o Google" class="rounded-circle avatar-sm">`;
+        const icon = `<img src="/static/img/user.png" alt="Logue-se com o Google" class="rounded-circle avatar-sm">`;
 
         // Cria o elemento <span>
         const loginSpan = `<span class="d-md-none ms-3">Login com Google</span>`;
@@ -217,7 +217,7 @@ const sendUserToBackend = async (user) => {
             email: user.email,
             photoURL: user.photoURL,
             // Converte as datas para UTC/ISO ao enviar para o backend
-            createdAt: timestampToISO(user.metadata.creationTime),
+            createdAt: timestampToISO(user.metadata.createdAt),
             lastLoginAt: timestampToISO(user.metadata.lastLoginAt),
         };
 

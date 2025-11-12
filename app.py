@@ -1,6 +1,15 @@
+# app.py
 from flask import Flask, render_template
+from database import init_db
+from owner import owner_bp
 
 app = Flask(__name__)
+
+# Inicializa o banco de dados ao iniciar o aplicativo
+init_db()
+
+# Registra o blueprint para as rotas de owner
+app.register_blueprint(owner_bp, url_prefix='/owner')
 
 # Rota da página inicial
 @app.route("/")

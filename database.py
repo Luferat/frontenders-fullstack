@@ -33,10 +33,11 @@ def init_db():
             pad_created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             pad_title TEXT NOT NULL,
             pad_content TEXT,
-            pad_owner INTEGER,
+            pad_views INTEGER DEFAULT '0',
+            pad_owner TEXT,
             pad_status TEXT NOT NULL DEFAULT 'ON' CHECK (pad_status IN ('ON', 'OFF', 'DEL')),
             pad_metadata TEXT,
-            FOREIGN KEY (pad_owner) REFERENCES owners (own_id)
+            FOREIGN KEY (pad_owner) REFERENCES owners (own_uid)
         )
     ''')
 

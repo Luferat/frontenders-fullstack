@@ -8,6 +8,7 @@ from blueprints.home import home_bp
 from blueprints.contacts import contacts_bp
 from blueprints.newpad import newpad_bp
 from blueprints.search import search_bp
+from blueprints.view import view_bp
 
 app = Flask(__name__)
 
@@ -24,6 +25,7 @@ app.register_blueprint(home_bp)
 app.register_blueprint(newpad_bp)
 app.register_blueprint(contacts_bp)
 app.register_blueprint(search_bp)
+app.register_blueprint(view_bp)
 
 
 @app.route("/about")

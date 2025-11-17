@@ -24,7 +24,7 @@ def home_page():
     # Executa a consulta
     cursor.execute('''
         SELECT
-            pad_id, pad_created_at, pad_title,
+            pad_id, pad_created_at, pad_title, pad_owner,
             own_id, own_display_name, own_photo_url,
             SUBSTR(pad_content, 1, 30) || '...' AS pad_content_preview
         FROM pads

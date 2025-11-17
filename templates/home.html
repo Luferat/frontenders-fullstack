@@ -1,24 +1,46 @@
-
 {% extends "_base.html" %}
 
 {% block content %}
 
-<h2>Todos os Pads</h2>
+<h2 class="mb-4">Todos os Pads</h2>
 
-{% for pad in all_pads %}
-    <div class="pad">
-        <h4>{{ pad.pad_title }}</h4>
-        <p>{{ pad.pad_content_preview }}</p>
-        <small>Por: 
-            <a href="/proprietario" title="Clique para ver detalhes de '{{ pad.own_display_name }}'...">
-                <img src="{{ pad.own_photo_url }}" alt="Foto de {{ pad.own_display_name }}" class="rounded-circle" width="30" referrerpolicy="no-referrer">
-                 {{ pad.own_display_name }}
-            </a>
-            em {{ pad.pad_created_at }}
-        </small>
+{% if all_pads %}
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for pad in all_pads %}
+    <div class="col">
+        <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card-header bg-light">
+                <a href="/view/{{ pad.pad_id }}" class="text-decoration-none fw-bold" title="Ver detalhes de '{{ pad.pad_title }}'.">
+                    {{ pad.pad_title | truncate(50) }}
+                </a>
+            </div>
+            <div class="card-body d-flex flex-column">
+                <p class="card-text text-muted flex-grow-1">
+                    {{ pad.pad_content_preview | truncate(120) }}
+                </p>
+            </div>
+            <div class="card-footer bg-light border-0">
+                <small class="text-muted d-flex align-items-center gap-2">
+                    <img src="{{ pad.own_photo_url }}" alt="{{ pad.own_display_name }}"
+                        class="rounded-circle" width="28" height="28" referrerpolicy="no-referrer">
+                    <span>
+                        Por
+                        <a href="/owner/{{pad.pad_owner}}" title="Ver detalhes de {{ pad.own_display_name }}.">
+                            <strong>{{ pad.own_display_name }}</strong></a><br>
+                        Em <em>{{ pad.pad_created_at }}</em>
+                    </span>
+                </small>
+            </div>
+        </div>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5">
+    <p class="lead text-muted">Nenhum pad criado ainda.</p>
+    <a href="/newpad" class="btn btn-primary btn-lg is-logged d-none">Criar o primeiro Pad</a>
+    <p class="not-is-logged d-block mt-3">Faça login para criar seu primeiro pad!</p>
+</div>
+{% endif %}
 
 {% endblock %}
-
-

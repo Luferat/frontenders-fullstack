@@ -1,4 +1,5 @@
 /**
+ * static\js\script.js
  * JavaScript do layout.
  * Template com autenticação de usuário pelo Google.
  * Referências desta página: https://firebase.google.com/docs/build?hl=pt-br
@@ -42,7 +43,16 @@ const apiLoginEndpoint = '/owner/login';
  * - Se vazio (""), não envia os dados para a API/backend;
  */
 // const apiLogoutEndpoint = '/user/logout'; // Exemplo
-const apiLogoutEndpoint = '';
+// const apiLogoutEndpoint = '';
+const apiLogoutEndpoint = '/owner/logout';
+
+/**
+ * Configuração: URL / rota da página inicial do aplicativo
+ * Informa para onde o usuário será enviado após o logout
+ * - Se vazio, não faz nada
+ */
+// const redirectOnLogout = ""
+const redirectOnLogout = "/"
 
 /**
  * Configuração: mostra logs das ações no console
@@ -85,30 +95,55 @@ const googleLogin = async () => {
 // Função para Logout
 const googleLogout = async () => {
     try {
-        // Limpa o estado no Firebase Authentication (do lado do cliente)
-        await auth.signOut();
+        let backendLogoutSuccess = true;
 
-        // Se configurou um endpoint de logout
-        if (apiLogoutEndpoint != "") {
+        // Notificar backend (se endpoint configurado)
+        if (apiLogoutEndpoint) {
+            try {
+                const response = await fetch(apiLogoutEndpoint, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify({ action: "logout" })
+                });
 
-            const response = await fetch(apiLogoutEndpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: "logout" })
-            });
+                backendLogoutSuccess = response.ok;
 
-            if (response.ok) {
-                showLogs ? console.log('Logout bem-sucedido e cookie de sessão removido!') : null;
-                // Após logout bem-sucedido, redireciona para a home
-                window.location.href = '/home';
-            } else {
-                showLogs ? console.error('Erro ao notificar o backend sobre o logout.') : null;
+                if (!response.ok) {
+                    showLogs && console.warn('Backend logout falhou, mas continuando...');
+                } else {
+                    showLogs && console.log('Cookie removido pelo backend.');
+                }
+            } catch (err) {
+                showLogs && console.warn('Erro ao comunicar com backend:', err);
+                backendLogoutSuccess = false;
+            }
+        }
+
+        // Logout do Firebase (independente do backend)
+        try {
+            await auth.signOut();
+            showLogs && console.log('Logout do Firebase concluído.');
+        } catch (err) {
+            showLogs && console.error('Erro ao fazer signOut no Firebase:', err);
+            return;
+        }
+
+        // Redirecionar apenas se tudo (ou o essencial) deu certo
+        if (backendLogoutSuccess || !apiLogoutEndpoint) {
+            if (redirectOnLogout) {
+                window.location.href = redirectOnLogout;
+            }
+        } else {
+            // Opcional: redirecionar mesmo assim, ou mostrar aviso
+            showLogs && console.error('Logout parcial: sessão local limpa, mas cookie pode persistir.', err);
+            if (redirectOnLogout) {
+                window.location.href = redirectOnLogout;
             }
         }
 
     } catch (error) {
-        showLogs ? console.error("Erro no logout:", error) : null;
-        alert('Erro ao fazer logout. Verifique o console para mais detalhes.');
+        showLogs && console.error("Erro inesperado no logout:", error);
     }
 };
 

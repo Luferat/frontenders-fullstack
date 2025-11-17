@@ -1,11 +1,11 @@
 # database.py
+# Estrutura e controle do banco de dados
+# Inicializa o banco de dados e cria as tabelas se não existirem
+
 import sqlite3
 
 # Nome do arquivo do banco de dados SQLite
 DB_NAME = 'database.db'
-
-# Função para inicializar o banco de dados e criar as tabelas se não existirem
-
 
 def init_db():
     conn = sqlite3.connect(DB_NAME)

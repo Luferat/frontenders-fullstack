@@ -1,3 +1,4 @@
+
 {% extends "_base.html" %}
 
 {% block content %}
@@ -8,8 +9,16 @@
     <div class="pad">
         <h4>{{ pad.pad_title }}</h4>
         <p>{{ pad.pad_content_preview }}</p>
-        <small>por {{ pad.own_display_name }} em {{ pad.pad_created_at }}</small>
+        <small>Por: 
+            <a href="/proprietario" title="Clique para ver detalhes de '{{ pad.own_display_name }}'...">
+                <img src="{{ pad.own_photo_url }}" alt="Foto de {{ pad.own_display_name }}" class="rounded-circle" width="30" referrerpolicy="no-referrer">
+                 {{ pad.own_display_name }}
+            </a>
+            em {{ pad.pad_created_at }}
+        </small>
     </div>
 {% endfor %}
 
 {% endblock %}
+
+

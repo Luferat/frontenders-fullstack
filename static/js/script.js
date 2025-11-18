@@ -104,7 +104,7 @@ const googleLogout = async () => {
                     method: 'POST',
                     credentials: 'include',
                     headers: { 'Content-Type': 'application/json', },
-                    body: JSON.stringify({ action: "logout" })
+                    body: JSON.stringify({ action: "logout", redirectTo: redirectOnLogout })
                 });
 
                 backendLogoutSuccess = response.ok;

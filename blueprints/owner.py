@@ -2,7 +2,7 @@
 # Controla a persistência do usuário
 # Controla o cookie de autenticação
 
-from flask import Blueprint, make_response, request, jsonify
+from flask import Blueprint, make_response, redirect, request, jsonify
 from database import DB_NAME
 import sqlite3
 
@@ -95,16 +95,24 @@ def owner_login():
 # Apaga o cookie do usuário quando fizer logout
 @owner_bp.route('/logout', methods=['POST'])
 def owner_logout():
-
     # Opcional: Verifique o body se necessário, mas aqui não é estritamente preciso
     data = request.json
+
+    print('\n\n\n', data, '\n\n\n')
+
     if data.get('action') != 'logout':
         return jsonify({'error': 'Ação inválida'}), 400
-
-    # Cria a resposta JSON
-    response = make_response(jsonify({'message': 'Logout bem-sucedido'}), 200)
     
-    # Apaga o cookie seguro
+    redirect_to = data.get('redirectTo')
+    
+    # Define o redirecionamento padrão se redirect_to for vazio ou None
+    if not redirect_to:
+        redirect_to = '/'
+    
+    # Cria a resposta de redirecionamento
+    response = make_response(redirect(redirect_to))
+    
+    # Apaga o cookie seguro durante o redirecionamento
     response.delete_cookie('owner_uid')
 
     return response

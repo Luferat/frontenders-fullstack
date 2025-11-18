@@ -36,4 +36,11 @@ def viewpad(pad_id):
         # Não logado ou não é dono
         is_owner = False
 
+    # Atualiza contador
+    cursor.execute(
+        "UPDATE pads SET pad_views = pad_views + 1 WHERE pad_id = ?",
+        (pad_id,)
+    )
+    conn.commit()
+
     return render_template("viewpad.html", pad=row, is_owner=is_owner)

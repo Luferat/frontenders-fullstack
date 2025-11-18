@@ -37,8 +37,5 @@ def home_page():
     rows = cursor.fetchall()
     all_pads = [dict(row) for row in rows]
 
-    # Alguns Debugs
-    print('\n\n\n', all_pads, '\n\n\n')  # Mas quero assim
-
     # Passa os resultados para a página HTML
     return render_template("home.html", all_pads=all_pads)

@@ -57,9 +57,20 @@
         </div>
     </nav>
 
-<main class="container mt-5 p-4 bg-white d-flex flex-column flex-grow-1">
-    {% block content %}{% endblock %}
-</main>
+    <main class="container mt-5 p-4 bg-white d-flex flex-column flex-grow-1">
+        {# Mensagens flash formatadas no Bootstrap 5 #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
 
     <footer class="bg-dark text-light">
 

@@ -9,8 +9,12 @@ from blueprints.contacts import contacts_bp
 from blueprints.newpad import newpad_bp
 from blueprints.search import search_bp
 from blueprints.viewpad import viewpad_bp
+from blueprints.deletepad import delete_bp
 
 app = Flask(__name__)
+
+# Chave secreta da sessão
+app.secret_key = '39888r09e748y5872y487ht43987thdj843th2ej3298t3490twh49ktgb9487tb974b74128bt97tb'
 
 # Inicializa o banco de dados ao iniciar o aplicativo
 init_db()
@@ -26,6 +30,7 @@ app.register_blueprint(viewpad_bp)
 app.register_blueprint(newpad_bp)
 app.register_blueprint(contacts_bp)
 app.register_blueprint(search_bp)
+app.register_blueprint(delete_bp)
 
 
 @app.route("/about")

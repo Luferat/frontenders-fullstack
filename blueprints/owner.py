@@ -1,4 +1,5 @@
 # blueprints/owner.py
+
 import sqlite3
 from flask import Blueprint, make_response, redirect, request, jsonify, url_for
 

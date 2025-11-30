@@ -17,7 +17,7 @@ def delete_page(pad_id):
     owner_uid = request.cookies.get('owner_uid')
     if owner_uid is None:
         return redirect(url_for('home.home_page'))
-    
+
     # Conecta ao banco de dados
     conn = sqlite3.connect(DB_NAME)
     conn.row_factory = sqlite3.Row
@@ -25,11 +25,10 @@ def delete_page(pad_id):
 
     cursor.execute('''
         UPDATE pads SET pad_status = 'DEL' 
-        WHERE pad_id = ?
-	        AND pad_owner = ?
-                   ''', (pad_id, owner_uid))
+        WHERE pad_id = ? AND pad_owner = ?
+    ''', (pad_id, owner_uid))
     conn.commit()
 
     # Redireciona para a página inicial
     flash('Pad deletado com sucesso!', 'success')
-    return redirect(url_for('home.home_page')) 
+    return redirect(url_for('home.home_page'))

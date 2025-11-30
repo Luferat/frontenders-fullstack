@@ -328,16 +328,26 @@ const isoToTimestamp = (isoString) => {
 
 // Oculta o menu ao clicar em um item, em telas menores
 document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('#mynavbar .nav-link');
-  const collapseElement = document.getElementById('mynavbar');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (collapseElement.classList.contains('show')) {
-        const collapse = new bootstrap.Collapse(collapseElement);
-        collapse.hide();
-      }
+    const navLinks = document.querySelectorAll('#mynavbar .nav-link');
+    const collapseElement = document.getElementById('mynavbar');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (collapseElement.classList.contains('show')) {
+                const collapse = new bootstrap.Collapse(collapseElement);
+                collapse.hide();
+            }
+        });
     });
-  });
+});
+
+// Fecha caixas de alerta após 5 segundos
+const delayInMilliseconds = 5000;
+document.addEventListener('DOMContentLoaded', function () {
+    const alertElement = document.getElementById('baseMainAlert');
+    if (alertElement) {
+        const bsAlert = new bootstrap.Alert(alertElement);
+        setTimeout(function () { bsAlert.close(); }, delayInMilliseconds);
+    }
 });
 
 // Listener para o estado de autenticação

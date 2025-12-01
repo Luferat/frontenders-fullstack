@@ -2,7 +2,16 @@
 
 {% block content %}
 
-<h2>Novo Pad</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi odio voluptate, sunt architecto labore ipsum sapiente quidem et soluta beatae repellendus quam iure nemo ab dicta at accusantium sint? Deleniti.</p>
+<h3>Novo Pad</h3>
+
+<form method="post" action="/new" class="d-flex flex-column flex-grow-1">
+
+    <input type="text" name="padtitle" value="" required minlength="4" class="form-control fs-3" placeholder="Titulo do Pad">
+    <textarea name="padcontent" class="form-control flex-grow-1 font-monospace mt-2" required minlength="4" placeholder="Conteúdo do Pad"></textarea>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-warning">Salvar</button>
+    </div>
+
+</form>
 
 {% endblock %}

@@ -28,7 +28,7 @@
                         Por
                         <a href="/owner/{{pad.pad_owner}}" title="Ver detalhes de {{ pad.own_display_name }}.">
                             <strong>{{ pad.own_display_name }}</strong></a><br>
-                        Em <em>{{ pad.pad_created_at }}</em>
+                        Em <em>{{ pad.pad_created_at | fmtdate }}</em>
                     </span>
                 </small>
             </div>

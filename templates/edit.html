@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<form method="post" action="/edit/{{ pad.pad_id }}" class="d-flex flex-column flex-grow-1">
+
+    <input type="text" name="padtitle" value="{{ pad.pad_title}}" required minlength="4" class="form-control fs-3">
+    <textarea name="padcontent" class="form-control flex-grow-1 font-monospace mt-2" required minlength="4">{{ pad.pad_content }}</textarea>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-warning">Salvar</button>
+    </div>
+
+</form>
+
+{% endblock %}

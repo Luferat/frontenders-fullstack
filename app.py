@@ -1,6 +1,7 @@
 # app.py
 # Aplicativo principal
 
+from datetime import datetime
 from flask import Flask, render_template
 from database import init_db
 from blueprints.owner import owner_bp
@@ -10,8 +11,16 @@ from blueprints.newpad import newpad_bp
 from blueprints.search import search_bp
 from blueprints.view import view_bp
 from blueprints.delete import delete_bp
+from blueprints.edit import edit_bp
 
 app = Flask(__name__)
+
+
+@app.template_filter("fmtdate")
+def fmtdate(value):
+    dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+    return dt.strftime("%d/%m/%Y às %H:%M")
+
 
 # Chave secreta da sessão
 app.secret_key = '6t4ty483y967t847yt98ut908u2t90yu8y08yu4uy038jgf83bg852'
@@ -32,6 +41,7 @@ app.register_blueprint(contacts_bp)
 app.register_blueprint(search_bp)
 app.register_blueprint(view_bp)
 app.register_blueprint(delete_bp)
+app.register_blueprint(edit_bp)
 
 
 @app.route("/about")
@@ -46,4 +56,3 @@ def privacy_page():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

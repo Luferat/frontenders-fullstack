@@ -14,7 +14,7 @@
         <img src="{{ pad.own_photo_url }}" alt="{{ pad.own_display_name }}" class="rounded-circle" width="64" height="64" referrerpolicy="no-referrer">
         <span>
             Por <strong><a href="/owner/{{ pad.own_id}}">{{ pad.own_display_name }}</a></strong><br>
-            Em <em>{{ pad.pad_created_at }}</em><br>
+            Em <em>{{ pad.pad_created_at | fmtdate }}</em><br>
             {{ pad.pad_views }} visitas
         </span>
     </small>

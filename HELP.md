@@ -114,27 +114,3 @@ app.register_blueprint(edit_bp)
 ```
 
 ---
-
-# Pesquisa
-
- - [ ] Edite `templates\_base.html`
- 
-Altere a seção do formulário de pesquisa que deve ficar:
-
-```html
-<form class="order-2 order-md-1 w-100" name="searchform" method="get" action="/search">
-    <div class="input-group">
-        <input class="form-control" type="search" placeholder="Procurar Pad..." name="q" required minlength="2" value="{{ query }}">
-        <button class="btn btn-secondary" type="submit"><i class="bi bi-search"></i></button>
-    </div>
-</form>
-```
-
- - [ ] Edite `templates\search.html`
-
-Vamos inserir um formulário auxiliar já que `/search` pode ser acessada diretamente e exibir os resultados da pesquisa.
-
- - [ ] Edite `blueprints\search.py`
-
-Recebe a "query" da pesquisa, sanitiza e envia a pesquisa ao banco de dados.
-Os resultados são exibidos pelo template `templates\search.html`.

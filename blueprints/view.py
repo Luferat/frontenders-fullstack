@@ -49,5 +49,6 @@ def view_page(pad_id):
     # Atualiza views do pad
     cursor.execute("UPDATE pads SET pad_views = pad_views + 1 WHERE pad_id = ?", (pad_id,))
     conn.commit()
+    conn.close()
     
     return render_template("view.html", pad=row, is_owner=is_owner)

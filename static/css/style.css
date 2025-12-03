@@ -54,3 +54,9 @@ footer a:hover {
     font-size: 1.5rem;
     margin-right: .5rem;
 }
+
+@media screen and (max-width: 768px) {
+    .w-md-100 {
+        width: 100% !important;
+    }
+}

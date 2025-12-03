@@ -41,8 +41,8 @@ def search_page():
             FROM pads
             INNER JOIN owners ON pad_owner = own_uid
             WHERE pad_status = 'ON' AND (
-                pad_title LIKE ? OR
-                pad_content LIKE ?
+                pad_title LIKE ? COLLATE NOCASE OR
+                pad_content LIKE ? COLLATE NOCASE
             )
             ORDER BY pad_created_at DESC;
         """, (sql_query, sql_query))

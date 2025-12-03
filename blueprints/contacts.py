@@ -13,14 +13,41 @@ contacts_bp = Blueprint('contacts', __name__)
 def contacts_page():
 
     # Obtém o cookie do usuário
-    # Se está logado
-        # Recuperar os dados do BD
-        # Atribui à variável "form" (abaixo) → form.name, form.email
-    # Se não está logado
+    owner_uid = request.cookies.get('owner_uid')
+    # print('\n\n\n', owner_uid, '\n\n\n')
+
+    # Conecta com o banco de dados
+    conn = sqlite3.connect(DB_NAME)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Se não está logado (não tem cookie)
+    if owner_uid is None:
         # Fazer 'form.name', 'form.email' vazios
+        own_name = ""
+        own_email = ""
+    else:
+        # Recuperar os dados do BD
+        cursor.execute(
+            "SELECT own_display_name, own_email FROM owners WHERE own_uid = ?",
+            (owner_uid,)
+        )
+        own = cursor.fetchone()
+        # print('\n\n\n', own['own_display_name'], own['own_email'], '\n\n\n')
+
+        # Preenche 'form.name' e 'form.email'
+        own_name = own['own_display_name']
+        own_email = own['own_email']
+
+        # Atribui à variável "form" (abaixo) → form.name, form.email
 
     # Inicializa campos do formulário
-    form = {}
+    form = {
+        "name": own_name,
+        "email": own_email,
+        "subject": "",
+        "message": ""
+    }
 
     # Se o form foi enviado...
     if request.method == "POST":
@@ -36,11 +63,6 @@ def contacts_page():
         # Debug - Dados do form recebidos
         # print('\n\n\n', form, '\n\n\n')
 
-        # Conecta com o banco de dados
-        conn = sqlite3.connect(DB_NAME)
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-
         # Query de insersão usado "prepared query"
         cursor.execute("""
             INSERT INTO contacts (
@@ -55,20 +77,17 @@ def contacts_page():
             form["message"],
         ))
 
-        # Salva a query no BD
+        # Salva a query no BD e fecha a conexão
         conn.commit()
+        conn.close()
 
         # Se o contato foi salvo no BD
         if cursor.rowcount == 1:
-            # Fecha o BD
-            conn.close()
             # Apaga dados do formulário
             form = {}
             # Mensagem flash para a próxima rota
             flash("Contato enviado com sucesso!", "success")
         else:
-            # Fecha o BD
-            conn.close()
             # Mensagem flash para a próxima rota
             flash(
                 "Oooops! Não foi possível enviar o contato. Tente novamente...", "danger")

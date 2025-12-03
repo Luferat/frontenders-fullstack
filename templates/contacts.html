@@ -3,6 +3,35 @@
 {% block content %}
 
 <h2>Faça Contato</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi odio voluptate, sunt architecto labore ipsum sapiente quidem et soluta beatae repellendus quam iure nemo ab dicta at accusantium sint? Deleniti.</p>
+
+<form action="/contacts" class="was-validated w-50 w-md-100 m-auto" method="post">
+
+    <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Seu nome:</label>
+        <input type="text" class="form-control" id="name" placeholder="Nome completo / social" name="name" required minlength="2" value="{{ form.name }}">
+        <div class="invalid-feedback">Preencha seu nome.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" id="email" placeholder="E-mail principal" name="email" required value="{{ form.email }}">
+        <div class="invalid-feedback">Informe um e-mail válido.</div>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="subject" class="form-label">Seu nome:</label>
+        <input type="text" class="form-control" id="subject" placeholder="Assunto do contato" name="subject" required minlength="4" value="{{ form.subject }}">
+        <div class="invalid-feedback">Informe um assunto.</div>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="message" class="form-label">Seu nome:</label>
+        <textarea class="form-control" id="message" placeholder="Detalhes do contato" name="message" rows="5" required minlength="4">{{ form.message }}</textarea>
+        <div class="invalid-feedback">Informe os detalhes do contato.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
 
 {% endblock %}

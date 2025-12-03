@@ -371,3 +371,8 @@ auth.onAuthStateChanged((user) => {
 
 // Adiciona o Event Listener ao elemento `userInOut`
 userInOut.addEventListener('click', handleUserInOutClick);
+
+// Bloqueia reenvio do formulário ao atualizar a página
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

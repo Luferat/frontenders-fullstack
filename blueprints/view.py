@@ -22,7 +22,7 @@ def view_page(pad_id):
     # SQL de consulta com preparated query
     cursor.execute('''
         SELECT 
-            pads.*, own_id, own_display_name, own_photo_url, own_status
+            pads.*, own_uid, own_display_name, own_photo_url, own_status
         FROM pads
         INNER JOIN owners ON pad_owner = own_uid
         WHERE pad_id = ? AND pad_status = 'ON'

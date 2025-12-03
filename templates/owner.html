@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="card m-auto my-3" style="max-width:350px">
+    <img class="card-img-top" src="{{ own.own_photo_url }}" alt="Foto de {{ own.own_display_name }}" style="width:100%" referrerpolicy="no-referrer">
+    <div class="card-body">
+        <h4 class="card-title">{{ own.own_display_name }}</h4>
+        <p class="card-text">Cadastrado desde {{ own.own_created_at | fmtnotime }}.</p>
+    </div>
+</div>
+
+<h4>Pads de {{ own.own_display_name }}</h4>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-2">
+    {% for pad in pads %}
+    <div class="col">
+        <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card-header bg-light">
+                <a href="/view/{{ pad.pad_id }}" class="text-decoration-none fw-bold" title="Ver detalhes de '{{ pad.pad_title }}'.">
+                    {{ pad.pad_title | truncate(50) }}
+                </a>
+            </div>
+            <div class="card-body d-flex flex-column">
+                <p class="card-text text-muted flex-grow-1">
+                    {{ pad.pad_content_preview | truncate(120) }}
+                </p>
+            </div>
+            <div class="card-footer bg-light border-0">
+                <small class="text-muted d-flex align-items-center gap-2">
+                    <span>Em <em>{{ pad.pad_created_at | fmtdate }}</em></span>
+                </small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -12,6 +12,7 @@ from blueprints.search import search_bp
 from blueprints.view import view_bp
 from blueprints.delete import delete_bp
 from blueprints.edit import edit_bp
+from blueprints.ownerdata import ownerdata_bp
 
 app = Flask(__name__)
 
@@ -21,6 +22,10 @@ def fmtdate(value):
     dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
     return dt.strftime("%d/%m/%Y às %H:%M")
 
+@app.template_filter("fmtnotime")
+def fmtdate(value):
+    dt = datetime.strptime(value, "%Y-%m-%d %H:%M:%S")
+    return dt.strftime("%d/%m/%Y")
 
 # Chave secreta da sessão
 app.secret_key = '6t4ty483y967t847yt98ut908u2t90yu8y08yu4uy038jgf83bg852'
@@ -42,6 +47,7 @@ app.register_blueprint(search_bp)
 app.register_blueprint(view_bp)
 app.register_blueprint(delete_bp)
 app.register_blueprint(edit_bp)
+app.register_blueprint(ownerdata_bp)
 
 
 @app.route("/about")

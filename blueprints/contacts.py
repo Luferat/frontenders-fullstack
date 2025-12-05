@@ -84,7 +84,12 @@ def contacts_page():
         # Se o contato foi salvo no BD
         if cursor.rowcount == 1:
             # Apaga dados do formulário
-            form = {}
+            form = {
+                "name": own_name,
+                "email": own_email,
+                "subject": "",
+                "message": ""
+            }
             # Mensagem flash para a próxima rota
             flash("Contato enviado com sucesso!", "success")
         else:

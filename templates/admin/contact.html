@@ -1,0 +1,39 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<h2>Contato de {{ contact.cnt_name }}</h2>
+
+<form action="/contacts" class="w-50 w-md-100 m-auto" method="post">
+
+    <div class="mb-3 mt-3">
+        <label for="name" class="form-label">Remetente:</label>
+        <input type="text" class="form-control" id="name" name="name" readonly value="{{ contact.cnt_name }}">
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" id="email" name="email" readonly value="{{ contact.cnt_email }}">
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="subject" class="form-label">Assunto:</label>
+        <input type="text" class="form-control" id="subject" name="subject" readonly value="{{ contact.cnt_subject }}">
+        <div class="invalid-feedback">Informe um assunto.</div>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <label for="message" class="form-label">Mensagem:</label>
+        <textarea class="form-control" id="message" name="message" rows="5" readonly>{{ contact.cnt_message }}</textarea>
+    </div>
+
+    <p class="text-center mt-4">
+        <a href="/admin/contacts" class="btn btn-primary btn-sm">Todos os contatos</a>
+        <a href="mailto:{{ contact.cnt_email }}?subject={{ contact.cnt_subject | urlencode }}&body=Re: {{ contact.cnt_message | urlencode }}" target="_blank" class="btn btn-warning btn-sm">Responder</a>
+        <a href="/admin/contact/delete/{{ contact.cnt_id }}" class="btn btn-danger btn-sm" onclick="return confirm(`Tem certeza que deseja apagar o contato permanentemente?`);">Apagar</a>
+    </p>
+    
+
+</form>
+
+{% endblock %}

@@ -14,6 +14,10 @@ from blueprints.delete import delete_bp
 from blueprints.edit import edit_bp
 from blueprints.ownerdata import ownerdata_bp
 
+from blueprints.admin.contacts import admin_contacts_bp
+from blueprints.admin.contact import admin_contact_bp
+from blueprints.admin.contactdelete import admin_contact_delete_bp
+
 app = Flask(__name__)
 
 
@@ -49,6 +53,10 @@ app.register_blueprint(delete_bp)
 app.register_blueprint(edit_bp)
 app.register_blueprint(ownerdata_bp)
 
+# Rotas administrativas
+app.register_blueprint(admin_contacts_bp)
+app.register_blueprint(admin_contact_bp)
+app.register_blueprint(admin_contact_delete_bp)
 
 @app.route("/about")
 def about_page():

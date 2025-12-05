@@ -1,0 +1,36 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<h2>Contatos Recentes</h2>
+
+{% if contacts %}
+<small class="d-block mb-4">Ordenados pela data mais recente</small>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+    {% for contact in contacts %}
+    <div class="col">
+        <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card-header bg-light pe-2">
+                <a href="/admin/contact/{{ contact.cnt_id }}" class="text-decoration-none text-dark stretched-link float-end" style="font-size: 75%;" title="Detalhes do contato."><i class="bi bi-arrows-angle-expand"></i></a>
+                <strong>De: {{ contact.cnt_name }}</strong>
+                <small class="d-block">{{ contact.cnt_email }}</small>
+            </div>
+
+            <div class="card-body">
+                <p class="card-text text-muted flex-grow-1">{{ contact.cnt_subject | truncate(50) }}</p>
+            </div>
+
+            <div class="card-footer bg-light border-0 border-top p-1 text-center">
+                <small><em>Em {{ contact.cnt_created_at | fmtdate }}</em> &nbsp;&bull;&nbsp; {{ contact.cnt_status }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center py-5 d-table mx-auto">
+    <p class="lead text-muted">Nenhum contato enviado ainda.</p>
+</div>
+{% endif %}
+
+{% endblock %}

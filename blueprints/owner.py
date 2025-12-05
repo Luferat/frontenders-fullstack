@@ -52,7 +52,7 @@ def owner_login():
                 own_email, 
                 own_photo_url, 
                 own_created_at, 
-                own_last_login_at, 
+                own_last_login_at,
                 own_status
             ) VALUES (?, ?, ?, ?, ?, ?, 'ON')
         ''', (
@@ -61,7 +61,7 @@ def owner_login():
             data.get('email'),
             data.get('photoURL'),
             data.get('createdAt'),
-            data.get('lastLoginAt')
+            data.get('lastLoginAt'),
         ))
 
     conn.commit()

@@ -21,6 +21,7 @@ def init_db():
             own_photo_url TEXT,
             own_created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             own_last_login_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            own_isadmin BOOLEAN DEFAULT 'False',
             own_status TEXT NOT NULL DEFAULT 'ON' CHECK (own_status IN ('ON', 'OFF', 'DEL')),
             own_metadata TEXT
         )

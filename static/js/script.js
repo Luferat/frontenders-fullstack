@@ -340,16 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Fecha caixas de alerta após 5 segundos
-const delayInMilliseconds = 5000;
-document.addEventListener('DOMContentLoaded', function () {
-    const alertElement = document.getElementById('baseMainAlert');
-    if (alertElement) {
-        const bsAlert = new bootstrap.Alert(alertElement);
-        setTimeout(function () { bsAlert.close(); }, delayInMilliseconds);
-    }
-});
-
 // Listener para o estado de autenticação
 // Este listener é executado sempre que o estado do usuário (logado/deslogado) muda.
 auth.onAuthStateChanged((user) => {
@@ -371,6 +361,16 @@ auth.onAuthStateChanged((user) => {
 
 // Adiciona o Event Listener ao elemento `userInOut`
 userInOut.addEventListener('click', handleUserInOutClick);
+
+// Fecha caixas de alerta após 5 segundos
+const delayInMilliseconds = 5000;
+document.addEventListener('DOMContentLoaded', function () {
+    const alertElement = document.getElementById('baseMainAlert');
+    if (alertElement) {
+        const bsAlert = new bootstrap.Alert(alertElement);
+        setTimeout(function () { bsAlert.close(); }, delayInMilliseconds);
+    }
+});
 
 // Bloqueia reenvio do formulário ao atualizar a página
 if (window.history.replaceState) {

@@ -8,6 +8,7 @@ from database import DB_NAME
 # Cria o objeto blueprint da rota
 home_bp = Blueprint('home', __name__)
 
+
 @home_bp.route("/")
 @home_bp.route("/home")  # Para não precisar alterar o JavaScript
 def home_page():

@@ -13,7 +13,7 @@ edit_bp = Blueprint('edit', __name__)
 def edit_page(pad_id):
 
     # Recebe o cookie do usuário
-    owner_uid = request.cookies.get('owner_uid')    
+    owner_uid = request.cookies.get('owner_uid')
     if owner_uid is None:
         # Se  usuário não está logado, redireciona para a "home"
         return redirect(url_for('home.home_page'))

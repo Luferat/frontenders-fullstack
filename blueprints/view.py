@@ -4,8 +4,10 @@
 import sqlite3
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from database import DB_NAME
+from markdown_it import MarkdownIt
 
 view_bp = Blueprint('view', __name__)
+md = MarkdownIt()
 
 
 @view_bp.route("/view/<int:pad_id>")
@@ -35,20 +37,25 @@ def view_page(pad_id):
     if row is None:
         # Pad não encontrado ou foi deletado → vai pra home com mensagem
         flash('Este bloco de notas não existe ou foi removido.', 'info')
-        return redirect(url_for('home.home_page'))  # ajuste o nome do blueprint se necessário
-    
-    print('\n\n\n', row['pad_title'])
-    print(row['pad_owner'], owner_uid,'\n\n\n')
+        # ajuste o nome do blueprint se necessário
+        return redirect(url_for('home.home_page'))
 
     # Verifica se o usuário está logado e é owner do pad atual
-    if row['pad_owner'] == owner_uid:
-        is_owner = True
-    else:
-        is_owner = False
+    is_owner = (row['pad_owner'] == owner_uid)
+
+    # Se for markdown, converte para HTML
+    pad_html = None
+    if row["pad_is_markdown"] == "True":
+        pad_html = md.render(row["pad_content"])
 
     # Atualiza views do pad
     cursor.execute("UPDATE pads SET pad_views = pad_views + 1 WHERE pad_id = ?", (pad_id,))
     conn.commit()
     conn.close()
-    
-    return render_template("view.html", pad=row, is_owner=is_owner)
+
+    return render_template(
+        "view.html",
+        pad=row,
+        is_owner=is_owner,
+        pad_html=pad_html,
+    )

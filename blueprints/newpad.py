@@ -24,6 +24,7 @@ def newpad_page():
         # Recebe e filtra os valores preenchidos pelo usuário
         new_title = request.form.get("padtitle", "").strip()
         new_content = request.form.get("padcontent", "").strip()
+        is_markdown = "True" if request.form.get("padmarkdown") == "True" else "False"
 
         # Conecta com o Banco de dados
         conn = sqlite3.connect(DB_NAME)
@@ -32,8 +33,16 @@ def newpad_page():
 
         # Faz a insersão do novo registro no banco de dados
         cursor.execute(
-            "INSERT INTO pads (pad_title, pad_content, pad_owner) VALUES (?, ?, ?)",
-            (new_title, new_content, owner_uid,)
+            """
+            INSERT INTO pads (
+                pad_title,
+                pad_content,
+                pad_is_markdown,
+                pad_owner
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (new_title, new_content, is_markdown, owner_uid)
         )
 
         # Executa e encerra a conexão

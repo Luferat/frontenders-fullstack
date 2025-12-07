@@ -17,6 +17,11 @@
     <div class="col">
         <div class="card h-100 shadow-sm hover-shadow transition">
             <div class="card-header bg-light">
+                {% if pad.pad_is_markdown == 'True' %}
+                    <span class="pe-1"><i class="bi bi-markdown-fill"></i></span>
+                {% else %}
+                    <span class="pe-1"><i class="bi bi-file-text-fill"></i></span>
+                {% endif %}
                 <a href="/view/{{ pad.pad_id }}" class="text-decoration-none fw-bold" title="Ver detalhes de '{{ pad.pad_title }}'.">
                     {{ pad.pad_title | truncate(50) }}
                 </a>

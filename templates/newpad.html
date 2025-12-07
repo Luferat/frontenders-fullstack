@@ -2,9 +2,16 @@
 
 {% block content %}
 
-<h3>Novo Pad</h3>
-
 <form method="post" action="/new" class="d-flex flex-column flex-grow-1">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <h3>Novo Pad</h3>
+        <label for="padmarkdown">
+            <input type="checkbox" name="padmarkdown" id="padmarkdown" value="True">
+            &nbsp; Markdown
+            <i class="bi bi-question-circle-fill" title="Marque essa opção se o conteúdo deste PAD é um documento no formato Markdown."></i>
+        </div>
+    </div>
 
     <input type="text" name="padtitle" value="" required minlength="4" class="form-control fs-3" placeholder="Titulo do Pad">
     <textarea name="padcontent" class="form-control flex-grow-1 font-monospace mt-2" required minlength="4" placeholder="Conteúdo do Pad"></textarea>

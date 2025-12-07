@@ -59,7 +59,7 @@ const redirectOnLogout = "/"
  *  - Se true, mostra logs
  *  - Se false, oculta logs
  */
-const showLogs = true;
+const showLogs = false;
 
 /**************************************************************************
  * Não altere nada à partir daqui a não ser que saiba o que está fazendo! *

@@ -18,7 +18,8 @@ def admin_contact_page(cid):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
+    cursor.execute(
+        "SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
     row = cursor.fetchone()
 
     if row is None or row['own_is_admin'] == 'False':
@@ -36,9 +37,10 @@ def admin_contact_page(cid):
 
     if row is None:
         return redirect(url_for('admin_contacts.admin_contacts_page'))
-    
-    cursor.execute("UPDATE contacts SET cnt_status = 'Lido' WHERE cnt_id = ? AND cnt_status != 'Apagado'", (cid,))
+
+    cursor.execute(
+        "UPDATE contacts SET cnt_status = 'Lido' WHERE cnt_id = ? AND cnt_status != 'Apagado'", (cid,))
     conn.commit()
     conn.close()
 
-    return render_template("admin/contact.html", contact=row)
+    return render_template("admin/contact.html", contact=row, page_title=f"Contato de {row['cnt_name']}")

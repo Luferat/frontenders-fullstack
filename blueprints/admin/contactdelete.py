@@ -18,7 +18,8 @@ def admin_contact_delete_page(cid):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
+    cursor.execute(
+        "SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
     row = cursor.fetchone()
 
     if row is None or row['own_is_admin'] == 'False':
@@ -27,7 +28,7 @@ def admin_contact_delete_page(cid):
 
     cursor.execute(
         "UPDATE contacts SET cnt_status = 'Apagado' WHERE cnt_id = ? AND cnt_status != 'Apagado'",
-         (cid,)
+        (cid,)
     )
     conn.commit()
     conn.close()

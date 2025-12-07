@@ -8,6 +8,7 @@ from database import DB_NAME
 
 admin_contacts_bp = Blueprint('admin_contacts', __name__,)
 
+
 @admin_contacts_bp.route("/admin/contacts", methods=["GET", "POST"])
 def admin_contacts_page():
 
@@ -17,7 +18,8 @@ def admin_contacts_page():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
+    cursor.execute(
+        "SELECT own_is_admin FROM owners WHERE own_uid = ? AND own_status = 'ON'", (owner_uid,))
     row = cursor.fetchone()
 
     if row is None or row['own_is_admin'] == 'False':
@@ -33,4 +35,4 @@ def admin_contacts_page():
     rows = cursor.fetchall()
     conn.close()
 
-    return render_template("admin/contacts.html", contacts=rows)
+    return render_template("admin/contacts.html", contacts=rows, page_title="Administração - Contatos Recentes")

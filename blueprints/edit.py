@@ -68,4 +68,4 @@ def edit_page(pad_id):
     # Fecha conexão com DB
     conn.close()
     # Mostra formulário preenchido
-    return render_template("edit.html", pad=row)
+    return render_template("edit.html", pad=row, page_title=f"Editando - {row['pad_title']}")

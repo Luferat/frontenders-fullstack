@@ -7,6 +7,7 @@ DB_NAME = 'database.db'
 add_owners = True
 add_fakes = True
 
+
 def init_db():
     # Conexão
     conn = sqlite3.connect(DB_NAME)
@@ -68,8 +69,10 @@ def init_db():
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''',
             [
-                ('1', 'yzfYicMZxLM34M7CfYTPQl7Pj182','André Luferat','andre@luferat.net', 'https://lh3.googleusercontent.com/a/ACg8ocKxQS94-RYr_kReF-M-1ZgXwlZBcVaDNhb9ZpQPG0le0G5WAQOD=s96-c', '2025-11-03 14:46:59','2025-12-05 15:43:56','True'),
-                ('2', '50kPEJMxfhdfk0mQHn60SnTSq192','Luferat CataBits','catabits@gmail.com', 'https://lh3.googleusercontent.com/a/ACg8ocLxL_XA-Lo9mEuBsIQzhsratQ772AfEL9OzlLt7YJ9U12cQy6OB=s96-c', '2025-11-12 11:08:34','2025-12-05 15:35:27','False')
+                ('1', 'yzfYicMZxLM34M7CfYTPQl7Pj182', 'André Luferat', 'andre@luferat.net',
+                 'https://lh3.googleusercontent.com/a/ACg8ocKxQS94-RYr_kReF-M-1ZgXwlZBcVaDNhb9ZpQPG0le0G5WAQOD=s96-c', '2025-11-03 14:46:59', '2025-12-05 15:43:56', 'True'),
+                ('2', '50kPEJMxfhdfk0mQHn60SnTSq192', 'Luferat CataBits', 'catabits@gmail.com',
+                 'https://lh3.googleusercontent.com/a/ACg8ocLxL_XA-Lo9mEuBsIQzhsratQ772AfEL9OzlLt7YJ9U12cQy6OB=s96-c', '2025-11-12 11:08:34', '2025-12-05 15:35:27', 'False')
             ]
         )
 
@@ -81,16 +84,26 @@ def init_db():
             VALUES (?, ?, ?, ?, ?, ?)
             ''',
             [
-                ('1', 'Receita de Bolo de Chocolate', 'Ingredientes: 2 xícaras de farinha, 1 xícara de açúcar, 3 ovos. Modo: Misture tudo e asse por 30 min. Delícia!', '2025-11-11 10:00:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
-                ('2', 'Dicas para Viajar Barato', 'Compre passagens com antecedência, use hostels e coma street food. Aventura garantida!', '2025-11-10 14:30:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
-                ('3', 'Como Treinar Seu Cachorro', 'Use petiscos como recompensa, treine comandos básicos como senta e fica. Paciência é chave!', '2025-11-09 09:15:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
-                ('4', 'Receita de Pizza Caseira', 'Massa: farinha, água, fermento. Recheio: molho, queijo, pepperoni. Asse em forno quente.', '2025-11-08 16:45:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
-                ('5', 'Melhores Filmes de Comédia', 'Recomendo "Se Beber Não Case" e "Superbad". Risadas non-stop!', '2025-11-07 11:20:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
-                ('6', 'Dicas de Jardinagem para Iniciantes', 'Escolha plantas resistentes, regue moderadamente e use sol adequado. Verde na casa!', '2025-11-06 13:50:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
-                ('7', 'Receita de Smoothie Energético', 'Banana, morango, iogurte e espinafre. Bata no liquidificador para um boost matinal.', '2025-11-05 08:30:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
-                ('8', 'Histórias Engraçadas de Viagem', 'Uma vez, confundi o trem e acabei em outra cidade. Lição: leia as placas!', '2025-11-04 15:10:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
-                ('9', 'Como Fazer Exercícios em Casa', 'Flexões, abdominais e corrida no lugar. Sem academia necessária!', '2025-11-03 17:40:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
-                ('10', 'Receita de Cookies Perfeitos', 'Manteiga, açúcar, farinha e gotas de chocolate. Asse até dourar. Irresistíveis!', '2025-11-02 12:00:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192')
+                ('1', 'Receita de Bolo de Chocolate', 'Ingredientes: 2 xícaras de farinha, 1 xícara de açúcar, 3 ovos. Modo: Misture tudo e asse por 30 min. Delícia!',
+                 '2025-11-11 10:00:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
+                ('2', 'Dicas para Viajar Barato', 'Compre passagens com antecedência, use hostels e coma street food. Aventura garantida!',
+                 '2025-11-10 14:30:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
+                ('3', 'Como Treinar Seu Cachorro', 'Use petiscos como recompensa, treine comandos básicos como senta e fica. Paciência é chave!',
+                 '2025-11-09 09:15:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
+                ('4', 'Receita de Pizza Caseira', 'Massa: farinha, água, fermento. Recheio: molho, queijo, pepperoni. Asse em forno quente.',
+                 '2025-11-08 16:45:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
+                ('5', 'Melhores Filmes de Comédia', 'Recomendo "Se Beber Não Case" e "Superbad". Risadas non-stop!',
+                 '2025-11-07 11:20:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
+                ('6', 'Dicas de Jardinagem para Iniciantes', 'Escolha plantas resistentes, regue moderadamente e use sol adequado. Verde na casa!',
+                 '2025-11-06 13:50:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
+                ('7', 'Receita de Smoothie Energético', 'Banana, morango, iogurte e espinafre. Bata no liquidificador para um boost matinal.',
+                 '2025-11-05 08:30:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
+                ('8', 'Histórias Engraçadas de Viagem', 'Uma vez, confundi o trem e acabei em outra cidade. Lição: leia as placas!',
+                 '2025-11-04 15:10:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192'),
+                ('9', 'Como Fazer Exercícios em Casa', 'Flexões, abdominais e corrida no lugar. Sem academia necessária!',
+                 '2025-11-03 17:40:00', 'ON', 'yzfYicMZxLM34M7CfYTPQl7Pj182'),
+                ('10', 'Receita de Cookies Perfeitos', 'Manteiga, açúcar, farinha e gotas de chocolate. Asse até dourar. Irresistíveis!',
+                 '2025-11-02 12:00:00', 'ON', '50kPEJMxfhdfk0mQHn60SnTSq192')
             ]
         )
 

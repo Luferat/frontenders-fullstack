@@ -50,7 +50,7 @@ def search_page():
         # Obtém o resultado
         rows = cursor.fetchall()
         pad_results = [dict(row) for row in rows]
-        
+
         # Obtém o total de registro encontrados
         pad_total = len(pad_results)
 
@@ -62,5 +62,6 @@ def search_page():
         "search.html",
         query=query,
         pad_results=pad_results,
-        pad_total=pad_total
+        pad_total=pad_total,
+        page_title=f'Pesquisando por "{query}"' if query else "Pesquisar"
     )

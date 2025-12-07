@@ -7,6 +7,7 @@ from database import DB_NAME
 
 owner_bp = Blueprint('owner', __name__)
 
+
 @owner_bp.route('/login', methods=['POST'])
 def owner_login():
     # Recebe os dados do usuário em JSON
@@ -89,6 +90,7 @@ def owner_login():
     )
 
     return response
+
 
 @owner_bp.route('/logout', methods=['POST'])
 def owner_logout():

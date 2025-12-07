@@ -3,9 +3,9 @@
 {% block content %}
 
 {% if query == '' %}
-    <h2>Pesquisar</h2>
+<h2>Pesquisar</h2>
 {% else %}
-    <h2>Pesquisando por "{{ query }}"</h2>
+<h2>Pesquisando por "{{ query }}"</h2>
 {% endif %}
 
 <div>
@@ -16,22 +16,22 @@
 </div>
 
 {% if pad_total == 0 %}
-    <h4>Nenhum Pad encontrado</h4>
+<h4>Nenhum Pad encontrado</h4>
 {% elif pad_total == 1 %}
-    <h4>1 Pad encontrado:</h4>
+<h4>1 Pad encontrado:</h4>
 {% else %}
-    <h4>{{ pad_total }} Pads encontrados:</h4>
+<h4>{{ pad_total }} Pads encontrados:</h4>
 {% endif %}
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-1">
-        {% for pad in pad_results %}
+    {% for pad in pad_results %}
     <div class="col">
         <div class="card h-100 shadow-sm hover-shadow transition">
             <div class="card-header bg-light">
                 {% if pad.pad_is_markdown == 'True' %}
-                    <span class="pe-1"><i class="bi bi-markdown-fill"></i></span>
+                <span class="pe-1"><i class="bi bi-markdown-fill"></i></span>
                 {% else %}
-                    <span class="pe-1"><i class="bi bi-file-text-fill"></i></span>
+                <span class="pe-1"><i class="bi bi-file-text-fill"></i></span>
                 {% endif %}
                 <a href="/view/{{ pad.pad_id }}" class="text-decoration-none fw-bold" title="Ver detalhes de '{{ pad.pad_title }}'.">
                     {{ pad.pad_title | truncate(50) }}
@@ -44,8 +44,7 @@
             </div>
             <div class="card-footer bg-light border-0">
                 <small class="text-muted d-flex align-items-center gap-2">
-                    <img src="{{ pad.own_photo_url }}" alt="{{ pad.own_display_name }}"
-                        class="rounded-circle" width="28" height="28" referrerpolicy="no-referrer">
+                    <img src="{{ pad.own_photo_url }}" alt="{{ pad.own_display_name }}" class="rounded-circle" width="28" height="28" referrerpolicy="no-referrer">
                     <span>
                         Por
                         <a href="/owner/{{pad.pad_owner}}" title="Ver detalhes de {{ pad.own_display_name }}.">

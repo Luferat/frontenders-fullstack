@@ -9,6 +9,8 @@ from database import DB_NAME
 newpad_bp = Blueprint('newpad', __name__)
 
 # Rota válida para os "method" "GET" e "POST"
+
+
 @newpad_bp.route("/new", methods=["GET", "POST"])
 def newpad_page():
 
@@ -24,7 +26,8 @@ def newpad_page():
         # Recebe e filtra os valores preenchidos pelo usuário
         new_title = request.form.get("padtitle", "").strip()
         new_content = request.form.get("padcontent", "").strip()
-        is_markdown = "True" if request.form.get("padmarkdown") == "True" else "False"
+        is_markdown = "True" if request.form.get(
+            "padmarkdown") == "True" else "False"
 
         # Conecta com o Banco de dados
         conn = sqlite3.connect(DB_NAME)
@@ -54,4 +57,4 @@ def newpad_page():
         return redirect(url_for("home.home_page"))
 
     # Exibe o formulário (metodo "GET")
-    return render_template("newpad.html")
+    return render_template("newpad.html", page_title="Novo Pad")

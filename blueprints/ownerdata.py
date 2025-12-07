@@ -38,4 +38,4 @@ def ownerdata_page(uid):
     pads = cursor.fetchall()
     total = len(pads)
 
-    return render_template("owner.html", own=own, pads=pads, total=total)
+    return render_template("owner.html", own=own, pads=pads, total=total, page_title=f"Usuário - {own['own_display_name']}")

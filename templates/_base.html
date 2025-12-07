@@ -11,7 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/static/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="/static/css/style.css">
+    {% if page_title %}
+    <title>FrontEnders - {{ page_title }}</title>
+    {% else %}
     <title>FrontEnders</title>
+    {% endif %}
 </head>
 
 <body class="bg-secondary d-flex flex-column min-vh-100">

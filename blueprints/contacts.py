@@ -97,4 +97,4 @@ def contacts_page():
             flash(
                 "Oooops! Não foi possível enviar o contato. Tente novamente...", "danger")
 
-    return render_template("contacts.html", form=form)
+    return render_template("contacts.html", form=form, page_title="Faça Contato")

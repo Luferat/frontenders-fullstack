@@ -49,7 +49,8 @@ def view_page(pad_id):
         pad_html = md.render(row["pad_content"])
 
     # Atualiza views do pad
-    cursor.execute("UPDATE pads SET pad_views = pad_views + 1 WHERE pad_id = ?", (pad_id,))
+    cursor.execute(
+        "UPDATE pads SET pad_views = pad_views + 1 WHERE pad_id = ?", (pad_id,))
     conn.commit()
     conn.close()
 
@@ -58,4 +59,5 @@ def view_page(pad_id):
         pad=row,
         is_owner=is_owner,
         pad_html=pad_html,
+        page_title=row['pad_title']
     )
